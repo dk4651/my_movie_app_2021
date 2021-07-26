@@ -2,28 +2,59 @@ import React from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
 import reactDom from 'react-dom';
-
+import axios from 'axios';
+import ShowMovie from './ShowMovie'
 
 
 //세 번째 예시 만들기 
 //영화 소개 사이트를 만들어라 
 class App extends React.Component{
   state = {
-    isLoading : false 
+    isLoading : false ,
+    Moviedata: []
   };
+GetData = async() => {
+  const Movieurl = await axios.get("https://yts.mx/api/v2/list_movies.json");
+  console.log(Movieurl);
+  this.setState({Moviedata : Movieurl.data.data.movies, isLoading:true});
+  console.log(this.state.Moviedata);
 
+
+}
   componentDidMount(){
-    setTimeout(()=>{
+    this.GetData();
+    /*setTimeout(()=>{
       this.setState({isLoading : true});
-    },6000);
+    },6000);*/
+
+    /*const GetData = async() => {
+      try {
+        const url = await axios.get("https://yts.mx/api/v2/list_movies.json");
+      } catch (error) {
   }
+  }
+  GetData();*/
+}
 
   render(){
 
     return(
 
       <div>
-        {this.state.isLoading ? <h2>I'm Ready</h2> : <h2>We R Loading{this.Clock}</h2>}
+        {this.state.isLoading ? 
+        (this.state.Moviedata.map(list =>
+          (<ShowMovie key = {list.id} 
+          title = {list.title} 
+          img = {list.medium_cover_image} 
+          summary = {list.summary} 
+          genres = {list.genres}/>)
+          )
+        )
+
+        : 
+
+        <h2>Loading...{this.Clock}</h2>}
+
       
       </div>
     )
