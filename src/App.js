@@ -1,42 +1,75 @@
 import React from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
+import reactDom from 'react-dom';
 
-//두 번째 예시 만들기 
-//버튼을 눌러서 숫자를 증/감시키기 
 
+
+//세 번째 예시 만들기 
+//영화 소개 사이트를 만들어라 
 class App extends React.Component{
   state = {
-    count : 0
+    isLoading : false 
+  };
 
-  };
-  Add = () => {
-    this.setState({count: this.state.count + 1})
-  };
-  Minus = () => {
-    this.setState({count: this.state.count - 1})
-  };
-  Reset = () =>{
-    this.setState({count: this.state.count = 0})
-  };
+  componentDidMount(){
+    setTimeout(()=>{
+      this.setState({isLoading : true});
+    },6000);
+  }
+
   render(){
+
     return(
-  
-    <div>
-      <p>
-        <h1>Current Number is : {this.state.count}</h1>
-      </p>
-      &nbsp;&nbsp;
-      <button onClick = {this.Add}> Plus </button>
-      &nbsp;&nbsp;
-      <button onClick ={this.Minus}> Minus </button>
-      &nbsp;&nbsp;
-      <button onClick ={this.Reset}> Reset </button>
-    </div>
+
+      <div>
+        {this.state.isLoading ? <h2>I'm Ready</h2> : <h2>We R Loading{this.Clock}</h2>}
+      
+      </div>
     )
 
   }
 }
+
+
+//세 번째 예시 만들기 
+
+
+//두 번째 예시 만들기 
+//버튼을 눌러서 숫자를 증/감시키기 
+
+// class App extends React.Component{
+//   state = {
+//     count : 0
+
+//   };
+//   Add = () => {
+//     this.setState({count: this.state.count + 1})
+//   };
+//   Minus = () => {
+//     this.setState({count: this.state.count - 1})
+//   };
+//   Reset = () =>{
+//     this.setState({count: this.state.count = 0})
+//   };
+//   render(){
+//     return(
+  
+//     <div>
+//       <p>
+//         <h1>Current Number is : {this.state.count}</h1>
+//       </p>
+//       &nbsp;&nbsp;
+//       <button onClick = {this.Add}> Plus </button>
+//       &nbsp;&nbsp;
+//       <button onClick ={this.Minus}> Minus </button>
+//       &nbsp;&nbsp;
+//       <button onClick ={this.Reset}> Reset </button>
+//     </div>
+//     )
+
+//   }
+// }
 
 //두 번째 예시 만들기 
 
