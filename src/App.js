@@ -3,7 +3,8 @@ import './App.css';
 import PropTypes from 'prop-types';
 import reactDom from 'react-dom';
 import axios from 'axios';
-import ShowMovie from './ShowMovie'
+import ShowMovie from './ShowMovie';
+import './App.css';
 
 
 //세 번째 예시 만들기 
@@ -39,24 +40,25 @@ GetData = async() => {
   render(){
 
     return(
-
-      <div>
+      <section className = 'container'>
         {this.state.isLoading ? 
-        (this.state.Moviedata.map(list =>
-          (<ShowMovie key = {list.id} 
+        <div className='movies'>
+          {this.state.Moviedata.map(list =>
+          (<ShowMovie 
+          key = {list.id} 
           title = {list.title} 
           img = {list.medium_cover_image} 
           summary = {list.summary} 
-          genres = {list.genres}/>)
-          )
-        )
-
+          genres = {list.genres}
+          />
+          ))}
+        </div>
         : 
-
-        <h2>Loading...{this.Clock}</h2>}
-
-      
-      </div>
+        <div className = 'loader'>
+          <span className = 'loader__text'>Loading...</span>
+        </div>
+        } 
+      </section>
     )
 
   }
