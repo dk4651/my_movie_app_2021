@@ -1,83 +1,67 @@
 import React from 'react';
-import {HashRouter, Route} from 'react-router-dom';
-import About from './routes/About';
-import Home from './routes/Home';
-import Navigation from './routes/Navigation';
-import Detail from './routes/Detail';
+import PropTypes from 'prop-types';
+import reactDom from 'react-dom';
+import axios from 'axios';
+import ShowMovie from '../components/ShowMovie';
+import './Home.css';
 
 
-
-
-function App (){
-
-  return(
-    <HashRouter>
-      <Navigation />
-      <Route path = '/' exact = {true} component ={Home} />
-      <Route path = '/about' component = {About} />
-      <Route path = '/movie-detail' component = {Detail} />
-
-
-
-    </HashRouter>
-  )
-}
-//세 번째 예시 만들기 
+//세 번째 예시 만들기
 //영화 소개 사이트를 만들어라 
-// class App extends React.Component{
-//   state = {
-//     isLoading : false ,
-//     Moviedata: []
-//   };
-// GetData = async() => {
-//   const Movieurl = await axios.get("https://yts.mx/api/v2/list_movies.json");
-//   console.log(Movieurl);
-//   this.setState({Moviedata : Movieurl.data.data.movies, isLoading:true});
-//   console.log(this.state.Moviedata);
+class Home extends React.Component{
+  state = {
+    isLoading : false ,
+    Moviedata: []
+  };
+GetData = async() => {
+  const Movieurl = await axios.get("https://yts.mx/api/v2/list_movies.json");
+  console.log(Movieurl);
+  this.setState({Moviedata : Movieurl.data.data.movies, isLoading:true});
+  console.log(this.state.Moviedata);
 
 
-// }
-//   componentDidMount(){
-//     this.GetData();
-//     /*setTimeout(()=>{
-//       this.setState({isLoading : true});
-//     },6000);*/
+}
+  componentDidMount(){
+    this.GetData();
+    /*setTimeout(()=>{
+      this.setState({isLoading : true});
+    },6000);*/
 
-//     /*const GetData = async() => {
-//       try {
-//         const url = await axios.get("https://yts.mx/api/v2/list_movies.json");
-//       } catch (error) {
-//   }
-//   }
-//   GetData();*/
-// }
+    /*const GetData = async() => {
+      try {
+        const url = await axios.get("https://yts.mx/api/v2/list_movies.json");
+      } catch (error) {
+  }
+  }
+  GetData();*/
+}
 
-//   render(){
+  render(){
 
-//     return(
-//       <section className = 'container'>
-//         {this.state.isLoading ? 
-//         <div className='movies'>
-//           {this.state.Moviedata.map(list =>
-//           (<ShowMovie 
-//           key = {list.id} 
-//           title = {list.title} 
-//           img = {list.medium_cover_image} 
-//           summary = {list.summary} 
-//           genres = {list.genres}
-//           />
-//           ))}
-//         </div>
-//         : 
-//         <div className = 'loader'>
-//           <span className = 'loader__text'>Loading...</span>
-//         </div>
-//         } 
-//       </section>
-//     )
+    return(
+      <section className = 'container'>
+        {this.state.isLoading ? 
+        <div className='movies'>
+          {this.state.Moviedata.map(list =>
+          (<ShowMovie 
+          key = {list.id} 
+          title = {list.title} 
+          img = {list.medium_cover_image} 
+          summary = {list.summary} 
+          genres = {list.genres}
+          />
+          ))}
+        </div>
+        : 
+        <div className = 'loader'>
+          <span className = 'loader__text'>Loading...</span>
+        </div>
+        } 
+      </section>
+    )
 
-//   }
-// }
+  }
+}
 
 
 //세 번째 예시 만들기 
@@ -180,4 +164,4 @@ function App (){
   // }
 // 첫 예시 만들기
 
-export default App;
+export default Home;
